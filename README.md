@@ -1,7 +1,3 @@
-<script
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
-  type="text/javascript">
-</script>
 # Задача №4 / Системное программирование
 ## Условие
 Джарвис сломался, так что Тони Старку нужна ваша помощь. У него есть два диска,
