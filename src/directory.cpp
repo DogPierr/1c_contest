@@ -76,7 +76,7 @@ void Directory::WriteStatistics(const std::vector<SimilarStrings> &same_files,
         std::cout << file_path << '\n';
     }
 
-    std::cout << "Files from directory " << GetPath() << " which are not present in " << other_directory.GetPath() << ":\n";
+    std::cout << "Files from directory " << other_directory.GetPath() << " which are not present in " << GetPath() << ":\n";
     for (size_t i = 0; i < is_file_2_similar_to_some_in_dir_1.size(); ++i) {
         if (!is_file_2_similar_to_some_in_dir_1[i]) {
             std::cout << files_2[i].GetPath() << '\n';

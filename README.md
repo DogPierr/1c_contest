@@ -38,7 +38,17 @@ similarity(s_1, s_2) = 1 - dist(s_1, s_2) / max(s_1.length, s_2.length).
 $$
 Не будем загружать в оперативную память содержимое всех файлов сразу, так как это будет слишком расточительно.
 
-## Build
-```bash
-cmake
+## Build and Run
+Собрать проект через `cmake`, запускать бинарник с следующими аргументами командной строки: `directory_1`, `directory_2`, `similarity_limit` 
+## Формат выводы
 ```
+Same files in both directories:
+...
+Similar files in both directories:
+...
+Files from directory {dir_1} which are not present in {dir_2}:
+...
+Files from directory {dir_2} which are not present in {dir_1}:
+...
+```
+
