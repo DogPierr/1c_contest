@@ -2,24 +2,24 @@
 #include <algorithm>
 #include <fstream>
 
-float File::CompareContentTo(const std::string& string_2) const{
+float File::CompareContentTo(const std::string &string_2) const {
     std::string string_1 = GetContent();
 
     size_t size_of_string_1 = string_1.size();
     size_t size_of_string_2 = string_2.size();
 
-    size_t dp[size_of_string_1 + 1][size_of_string_2 + 1];
+    std::vector<std::vector<size_t>> dp(size_of_string_1 + 1, std::vector<size_t>(size_of_string_2 + 1));
 
-    for (size_t i = 0; i <= size_of_string_1; ++i) {
-        for (size_t j = 0; j <= size_of_string_2; ++j) {
-            if (i == 0) {
-                dp[i][j] = j;
-            } else if (j == 0) {
-                dp[i][j] = i;
-            } else if (string_1[i - 1] == string_2[j - 1]) {
-                dp[i][j] = dp[i - 1][j - 1];
+    for (size_t row = 0; row <= size_of_string_1; ++row) {
+        for (size_t column = 0; column <= size_of_string_2; ++column) {
+            if (row == 0) {
+                dp[row][column] = column;
+            } else if (column == 0) {
+                dp[row][column] = row;
+            } else if (string_1[row - 1] == string_2[column - 1]) {
+                dp[row][column] = dp[row - 1][column - 1];
             } else {
-                dp[i][j] = 1 + std::min({dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]});
+                dp[row][column] = 1 + std::min({dp[row - 1][column], dp[row][column - 1], dp[row - 1][column - 1]});
             }
         }
     }
@@ -37,7 +37,7 @@ std::string File::GetContent() const {
     return GetContentOfFile(_file_path);
 }
 
-const std::string & File::GetPath() const {
+const std::string &File::GetPath() const {
     return _file_path;
 }
 
@@ -46,7 +46,7 @@ std::string File::GetContentOfFile(const std::string &path) const {
     std::string result;
     std::string line;
 
-    while(std::getline(file, line)) {
+    while (std::getline(file, line)) {
         result += line;
     }
 
