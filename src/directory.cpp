@@ -31,10 +31,11 @@ void Directory::CompareTo(const Directory &directory) const {
     std::vector<bool> is_file_2_similar_to_some_in_dir_1(files_2.size(), false);
 
     for (const auto& file_1 : files_1) {
+        auto file_1_content = file_1.GetContent();
         size_t file_2_index = 0;
         bool is_file_1_in_dir_2 = false;
         for (const auto& file_2 : files_2) {
-            auto result_of_comparation = file_1.CompareTo(file_2);
+            auto result_of_comparation = file_2.CompareContentTo(file_1_content);
             if (result_of_comparation == 1) {
                 is_file_1_in_dir_2 = true;
                 is_file_2_similar_to_some_in_dir_1[file_2_index] = true;

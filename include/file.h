@@ -8,15 +8,15 @@ public:
 
     File(const std::string& path_to_file);
 
-    float CompareTo(const File& file) const;
+    float CompareContentTo(const std::string& string_2) const;
 
-    const std::string& GetContent() const;
+    std::string GetContent() const;
 
-    const std::string & GetPath() const;
+    const std::string& GetPath() const;
 
 private:
     std::string _file_path;
     std::string _file_content;
 
-    std::string GetContentOfFile(const std::string& path);
+    std::string GetContentOfFile(const std::string& path) const;
 };

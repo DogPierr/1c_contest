@@ -2,9 +2,8 @@
 #include <algorithm>
 #include <fstream>
 
-float File::CompareTo(const File &file) const{
+float File::CompareContentTo(const std::string& string_2) const{
     std::string string_1 = GetContent();
-    std::string string_2 = file.GetContent();
 
     size_t size_of_string_1 = string_1.size();
     size_t size_of_string_2 = string_2.size();
@@ -26,7 +25,7 @@ float File::CompareTo(const File &file) const{
     }
 
     size_t dist = dp[size_of_string_1][size_of_string_2];
-    size_t maxLength = std::max(_file_content.length(), file.GetContent().length());
+    size_t maxLength = std::max(string_1.size(), string_2.size());
     float similarity = 1 - (static_cast<float>(dist) / static_cast<float>(maxLength));
 
     return similarity;
@@ -34,11 +33,15 @@ float File::CompareTo(const File &file) const{
 
 File::File(const std::string &path_to_file) : _file_path(path_to_file), _file_content(GetContentOfFile(path_to_file)) {}
 
-const std::string &File::GetContent() const {
-    return _file_content;
+std::string File::GetContent() const {
+    return GetContentOfFile(_file_path);
 }
 
-std::string File::GetContentOfFile(const std::string &path) {
+const std::string & File::GetPath() const {
+    return _file_path;
+}
+
+std::string File::GetContentOfFile(const std::string &path) const {
     std::ifstream file(path);
     std::string result;
     std::string line;
@@ -50,8 +53,4 @@ std::string File::GetContentOfFile(const std::string &path) {
     file.close();
 
     return result;
-}
-
-const std::string & File::GetPath() const {
-    return _file_path;
 }

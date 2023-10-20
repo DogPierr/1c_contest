@@ -11,7 +11,7 @@ public:
 
     File(const std::string& path_to_file);
 
-    float CompareTo(const File& file) const;
+    float CompareContentTo(const File& file) const;
 
     const std::string& GetContent() const;
 
@@ -24,7 +24,7 @@ private:
     std::string GetContentOfFile(const std::string& path);
 };
 
-float File::CompareTo(const File &file) const{
+float File::CompareContentTo(const File &file) const{
     std::string string_1 = GetContent();
     std::string string_2 = file.GetContent();
 
@@ -133,7 +133,7 @@ void ComparatorOfDirectories(const Directory& directory_1, const Directory& dire
         size_t file_2_index = 0;
         bool is_file_1_in_dir_2 = false;
         for (const auto& file_2 : files_2) {
-            auto result_of_comparation = file_1.CompareTo(file_2);
+            auto result_of_comparation = file_1.CompareContentTo(file_2);
             if (result_of_comparation == 1) {
                 is_file_1_in_dir_2 = true;
                 is_file_2_similar_to_some_in_dir_1[file_2_index] = true;
@@ -176,17 +176,11 @@ void ComparatorOfDirectories(const Directory& directory_1, const Directory& dire
 
 
 int main(int argc, char *argv[]) {
-//    if (argc != 4) {
-//        return 1;
-//    }
+    if (argc != 4) {
+        return 1;
+    }
 
-//    Directory directory_1(argv[1]);
-//    Directory directory_2(argv[2]);
-//    float similarity_index = std::stof(argv[3]);
-
-    Directory directory_1("dir_1");
-    Directory directory_2("dir_2");
-    float similarity_index = std::stof("0.5");
-
-    ComparatorOfDirectories(directory_1, directory_2, similarity_index);
+    Directory directory_1(argv[1]);
+    Directory directory_2(argv[2]);
+    float similarity_index = std::stof(argv[3]);
 }
